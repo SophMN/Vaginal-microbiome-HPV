@@ -1,0 +1,78 @@
+#Load and install the necessary packages
+BiocManager::install("DESeq2")
+BiocManager::install("Biostrings", force = TRUE)
+library(Biostrings) ; packageVersion("Biostrings")
+library(ggplot2)
+theme_set(theme_bw())
+library(DESeq2)
+
+#Import your sample metadata and convert it into a dataframe 
+samdf <- read.csv("/home/sophie/16s/hpv.metadata - Sheet1.csv")
+samdf <- data.frame(samdf)
+samples.out <- rownames(seqtab.nochim)
+rownames(samdf) <- samples.out
+
+#Create a phyloseq object using your sample metadata dataframe, the taxa file and the seqtab.nochim table from DADA2
+ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows = FALSE), sample_data(samdf), tax_table(taxa))
+vaginal_ps <- ps
+
+#Rename the taxa to a short DNA string using Biostrings
+dna <- Biostrings::DNAStringSet(taxa_names(vaginal_ps))
+names(dna) <- taxa_names(vaginal_ps)
+vaginal_ps <- merge_phyloseq(vaginal_ps, dna)
+taxa_names(vaginal_ps) <- paste0("ASV", seq(ntaxa(vaginal_ps)))
+vaginal_ps
+
+head(samdf)
+
+#Calculate and visualise alpha diversity using your desired metrics
+plot_richness(vaginal_ps, x = "hpv_status", measures = c("Shannon", "Simpson", "Chao1"), color = "hpv_status")
+theme_set(theme_bw())
+
+#Get count of phyla and genera
+table(phyloseq::tax_table(vaginal_ps)[, "Phylum"])
+table(phyloseq::tax_table(vaginal_ps)[, "Genus"])
+
+#Determine the relative abundance
+vaginal_ps_rel_abund = phyloseq::transform_sample_counts(vaginal_ps, function(x){x / sum(x)})
+phyloseq::otu_table(vaginal_ps)[1:5, 1:5]
+phyloseq::otu_table(vaginal_ps_rel_abund)[1:5, 1:5]
+library(dplyr)
+
+#Plot relative abundance based on your desired variables
+vaginal_ps_rel_abund_filtered <- subset_taxa(vaginal_ps_rel_abund, !is.na(Phylum) & !is.na(Genus))
+phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack") +
+  labs(x = "", y = "Relative abundance") +
+  facet_wrap(~hpv_status, scales = "free") +
+  theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack") +
+  labs(x = "", y = "Relative abundance") +
+  facet_wrap(~condom_use, scales = "free") +
+  theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack") +
+  labs(x = "", y = "Relative abundance") +
+  facet_wrap(~family_planning_use, scales = "free") +
+  theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack") +
+  labs(x = "", y = "Relative abundance") +
+  facet_wrap(~years_on_contraceptives, scales = "free") +
+  theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack") +
+  labs(x = "", y = "Relative abundance") +
+  facet_wrap(~education_level, scales = "free") +
+  theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack") +
+  labs(x = "", y = "Relative abundance") +
+  facet_wrap(~marital_status, scales = "free") +
+  theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
+  geom_bar(aes(color = Phylum, fill = Phylum), stat = "identity", position = "stack") +
+  labs(x = "", y = "Relative abundance") +
+  facet_wrap(~cervical_dysplasia, scales = "free") +
+  theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
