@@ -32,6 +32,8 @@ theme_set(theme_bw())
 #Get count of phyla and genera
 table(phyloseq::tax_table(vaginal_ps)[, "Phylum"])
 table(phyloseq::tax_table(vaginal_ps)[, "Genus"])
+write.csv(table(phyloseq::tax_table(vaginal_ps)[, "Phylum"]), file = "vaginal_phyla.csv")
+write.csv(table(phyloseq::tax_table(vaginal_ps)[, "Genus"]), file = "vaginal_genera.csv")
 
 #Determine the relative abundance
 vaginal_ps_rel_abund = phyloseq::transform_sample_counts(vaginal_ps, function(x){x / sum(x)})
