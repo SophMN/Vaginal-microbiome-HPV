@@ -26,7 +26,9 @@ vaginal_ps
 head(samdf)
 
 #Calculate and visualise alpha diversity using your desired metrics
-plot_richness(vaginal_ps, x = "hpv_status", measures = c("Shannon", "Simpson", "Chao1"), color = "hpv_status")
+estimate_richness(vaginal_ps, measures = c("Observed", "Shannon", "Simpson"))
+write.csv(estimate_richness(vaginal_ps, measures = c("Observed", "Shannon", "Simpson")), file = "alpha_diversity_metrics.csv")
+plot_richness(vaginal_ps, x = "hpv_status", measures = c("Shannon", "Simpson"), color = "hpv_status")
 theme_set(theme_bw())
 
 #Get count of phyla and genera
