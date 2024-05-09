@@ -31,6 +31,11 @@ write.csv(vaginal_rich, file = "alpha_diversity_metrics.csv")
 plot_richness(vaginal_ps, x = "hpv_status", measures = c("Shannon", "Simpson"), color = "hpv_status")
 theme_set(theme_bw())
 
+#Calculating the statistical significance of alpha diversity
+hpv_negative = vaginal_rich[samdf[, 'hpv_status'] == 'Negative',]
+hpv_positive = vaginal_rich[samdf[, 'hpv_status'] == 'Positive',]
+t.test(hpv_negative, hpv_positive)
+
 #Get count of phyla and genera
 table(phyloseq::tax_table(vaginal_ps)[, "Phylum"])
 table(phyloseq::tax_table(vaginal_ps)[, "Genus"])
