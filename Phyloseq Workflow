@@ -26,8 +26,8 @@ vaginal_ps
 head(samdf)
 
 #Calculate and visualise alpha diversity using your desired metrics
-estimate_richness(vaginal_ps, measures = c("Observed", "Shannon", "Simpson"))
-write.csv(estimate_richness(vaginal_ps, measures = c("Observed", "Shannon", "Simpson")), file = "alpha_diversity_metrics.csv")
+vaginal_rich <- estimate_richness(vaginal_ps, measures = c("Observed", "Shannon", "Simpson"))
+write.csv(vaginal_rich, file = "alpha_diversity_metrics.csv")
 plot_richness(vaginal_ps, x = "hpv_status", measures = c("Shannon", "Simpson"), color = "hpv_status")
 theme_set(theme_bw())
 
