@@ -36,6 +36,11 @@ hpv_negative = vaginal_rich[samdf[, 'hpv_status'] == 'Negative',]
 hpv_positive = vaginal_rich[samdf[, 'hpv_status'] == 'Positive',]
 t.test(hpv_negative, hpv_positive)
 
+#Transform data to proportions for Bray-Curtis distances (Beta diversity)
+vaginal_ps.prop <- transform_sample_counts(vaginal_ps, function(otu) otu/sum(otu))
+ord.nmds.bray <- ordinate(vaginal_ps.prop, method="NMDS", distance="bray")
+plot_ordination(vaginal_ps.prop, ord.nmds.bray, color="hpv_status", title="Bray NMDS")
+
 #Get count of phyla and genera
 table(phyloseq::tax_table(vaginal_ps)[, "Phylum"])
 table(phyloseq::tax_table(vaginal_ps)[, "Genus"])
