@@ -35,6 +35,14 @@ theme_set(theme_bw())
 hpv_negative = vaginal_rich[samdf[, 'hpv_status'] == 'Negative',]
 hpv_positive = vaginal_rich[samdf[, 'hpv_status'] == 'Positive',]
 t.test(hpv_negative, hpv_positive)
+always_use = vaginal_rich[samdf[, 'condom_use'] == 'Always',]
+never_use = vaginal_rich[samdf[, 'condom_use'] == 'Never',]
+sometimes_use = vaginal_rich[samdf[, 'condom_use'] == 'Sometimes',]
+t.test(always_use, never_use)
+t.test(always_use, sometimes_use)
+no_fp = vaginal_rich[samdf[, 'family_planning_use'] == 'No',]
+yes_fp = vaginal_rich[samdf[, 'family_planning_use'] == 'Yes',]
+t.test(no_fp, yes_fp)
 
 #Transform data to proportions for Bray-Curtis distances (Beta diversity)
 vaginal_ps.prop <- transform_sample_counts(vaginal_ps, function(otu) otu/sum(otu))
