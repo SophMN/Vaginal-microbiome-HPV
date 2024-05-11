@@ -9,5 +9,6 @@ Some of the key findings from the analysis are:
 
  ![Abundance by Phyla between HPV- and HPV+ Women](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/90e9593d-2959-487a-a257-cb67bb09caae)
 ![Bray Curtis NMDS](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/56fdc5a3-859c-4e68-a499-e3fe1d56db51)
+![1000102788](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/eaf08361-fdb7-4dda-9623-edb8b22c60c4)
 
 
