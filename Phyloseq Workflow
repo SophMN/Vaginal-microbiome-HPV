@@ -99,10 +99,13 @@ phyloseq::plot_bar(vaginal_ps_rel_abund_filtered, fill = "Phylum") +
   facet_wrap(~cervical_dysplasia, scales = "free") +
   theme(panel.background = element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
 
-#Agglomerate to the phylum level and rename
+#Agglomerate to the phylum and genus level and rename
 vaginal_ps_phylum <- phyloseq::tax_glom(vaginal_ps_rel_abund_filtered, "Phylum")
 phyloseq::taxa_names(vaginal_ps_phylum) <- phyloseq::tax_table(vaginal_ps_phylum) [, "Phylum"]
 phyloseq::otu_table(vaginal_ps_phylum) [1:5, 1:5]
+vaginal_ps_genus <- phyloseq::tax_glom(vaginal_ps_rel_abund_filtered, "Genus")
+phyloseq::taxa_names(vaginal_ps_genus) <- phyloseq::tax_table(vaginal_ps_genus) [, "Genus"]
+phyloseq::otu_table(vaginal_ps_genus) [1:5, 1:5]
 
 #Plot the agglomerated data
 library(tidyverse)
@@ -112,3 +115,7 @@ phyloseq::psmelt(vaginal_ps_phylum) %>%
   geom_jitter(aes(color = OTU), height = 0, width = 1) +
   labs(x = "", y = "Abundance", title = "Abundance by Phyla between HPV Negative and HPV Positive Women") +
   facet_wrap(~OTU, scales = "free")
+
+#Plot heatmaps
+plot_heatmap(vaginal_ps_phylum, taxa.label = "Phylum", taxa.order = "Phylum")
+plot_heatmap(vaginal_ps_genus, taxa.label = "Genus", taxa.order = "Genus")
