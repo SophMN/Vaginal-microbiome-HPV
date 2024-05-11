@@ -7,9 +7,11 @@ Some of the key findings from the analysis are:
 3. Both HIV and HPV infection is associated with vaginal dysbiosis. Gardnerella was the most abundant genus (1091 sequences) followed by Lactobacillus(982 sequences), Sneathia(504 sequences), Prevotella (458 sequences), Atopobium (358 sequences). All these genera, except Lactobacillus are associated with bacterial vaginosis, a state of vaginal microbial imbalance. Prevotella has been found to be associated with HIV infection. Sneathia is as emerging vaginal pathogen of interest, correlated with adverse reproductive and pregnancy outcomes. 3 STI-associated genera were also identified including: Mycoplasma(112 sequences), Ureaplasma (25 sequences) and Treponema_2(18 sequences). 56 sequences of Escherichia/Shigella were also identified, which could be attributed to poor hygiene and intravaginal cleaning.
 4. The vaginal microbiome composition of both HPV positive and HPV negative women with HIV is similar. Non-metric multidimensional scaling of Bray-Curtis distances revealed relatively little dissimilarity in the beta diversity of the 2 groups of women. This shows that there is no difference in the vaginal microbiomes of HIV positive women regardless of HPV status.
 
+ ![Relative abundance by HPV status](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/a3f21232-3d8a-4887-8402-7349460d9efc)
  ![Abundance by Phyla between HPV- and HPV+ Women](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/90e9593d-2959-487a-a257-cb67bb09caae)
+ ![alpha diversity](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/246328d3-83b4-4795-b8c4-2b655ecb6449)
 ![Bray Curtis NMDS](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/56fdc5a3-859c-4e68-a499-e3fe1d56db51)
-![Relative abundance by HPV status](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/2ac2fa37-41f3-4c53-8208-3f3366c532c0)
+
 
 
 
