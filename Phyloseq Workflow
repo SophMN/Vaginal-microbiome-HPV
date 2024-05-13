@@ -119,3 +119,7 @@ phyloseq::psmelt(vaginal_ps_phylum) %>%
 #Plot heatmaps
 plot_heatmap(vaginal_ps_phylum, taxa.label = "Phylum", taxa.order = "Phylum")
 plot_heatmap(vaginal_ps_genus, taxa.label = "Genus", taxa.order = "Genus")
+hpv_positive_data <- subset_samples(vaginal_ps_phylum, hpv_status == "Positive")
+hpv_negative_data <- subset_samples(vaginal_ps_phylum, hpv_status == "Negative")
+plot_heatmap(hpv_positive_data, taxa.label = "Phylum", taxa.order = "Phylum")
+plot_heatmap(hpv_negative_data, taxa.label = "Phylum", taxa.order = "Phylum")
