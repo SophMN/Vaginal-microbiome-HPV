@@ -17,5 +17,6 @@ Some of the key findings from the analysis are:
 
 Heatmap of phylum abundance among HPV-positive women with HIV.  
 
+![HPV Negative Heatmap](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/d29c2481-f90a-467f-9f28-6a014a264f93)
 
-
+Heatmap of phylum abundance among HPV-negative women with HIV.
