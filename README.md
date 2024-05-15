@@ -13,7 +13,8 @@ Some of the key findings from the analysis are:
 ![Bray Curtis NMDS](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/56fdc5a3-859c-4e68-a499-e3fe1d56db51)
 ![Heatmap of Phyla](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/774c8133-ab23-405a-91ca-7d9e40ad60b1)
 ![Genus Heatmap](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/1126cf9b-1513-41f9-81ea-d893b39f2a3b)
-
+![HPV Positive Heatmap](https://github.com/SophMN/Vaginal-microbiome-and-hpv/assets/145765029/bac40a81-fd3d-4f92-90da-a82586813057)
+Heatmap of phylum abundance among HPV-positive women with HIV.  
 
 
 
