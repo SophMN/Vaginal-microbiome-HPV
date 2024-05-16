@@ -49,6 +49,11 @@ vaginal_ps.prop <- transform_sample_counts(vaginal_ps, function(otu) otu/sum(otu
 ord.nmds.bray <- ordinate(vaginal_ps.prop, method="NMDS", distance="bray")
 plot_ordination(vaginal_ps.prop, ord.nmds.bray, color="hpv_status", title="Bray NMDS")
 
+#Calculate the statistical significance of beta diversity using PERMANOVA
+hpv_statuspmv <-adonis2(distance(vaginal_ps, method = "bray")~hpv_status, permutations = 999, data = samdf)
+hpv_statuspmv <- as_tibble(hpv_statuspmv)
+write.csv(hpv_statuspmv, file = "hpv_statuspmv.csv")
+
 #Get count of phyla and genera
 table(phyloseq::tax_table(vaginal_ps)[, "Phylum"])
 table(phyloseq::tax_table(vaginal_ps)[, "Genus"])
