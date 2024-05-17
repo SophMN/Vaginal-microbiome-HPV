@@ -5,6 +5,8 @@ library(Biostrings) ; packageVersion("Biostrings")
 library(ggplot2)
 theme_set(theme_bw())
 library(DESeq2)
+library(ggplot2)
+library(tidyverse)
 
 #Import your sample metadata and convert it into a dataframe 
 samdf <- read.csv("/home/sophie/16s/hpv.metadata - Sheet1.csv")
@@ -31,18 +33,17 @@ write.csv(vaginal_rich, file = "alpha_diversity_metrics.csv")
 plot_richness(vaginal_ps, x = "hpv_status", measures = c("Shannon", "Simpson"), color = "hpv_status")
 theme_set(theme_bw())
 
+#Check for normality in the alpha diversity metrics
+shapiro.test(vaginal_rich$Shannon)
+shapiro.test(vaginal_rich$Simpson)            
+
 #Calculating the statistical significance of alpha diversity
-hpv_negative = vaginal_rich[samdf[, 'hpv_status'] == 'Negative',]
-hpv_positive = vaginal_rich[samdf[, 'hpv_status'] == 'Positive',]
-t.test(hpv_negative, hpv_positive)
-always_use = vaginal_rich[samdf[, 'condom_use'] == 'Always',]
-never_use = vaginal_rich[samdf[, 'condom_use'] == 'Never',]
-sometimes_use = vaginal_rich[samdf[, 'condom_use'] == 'Sometimes',]
-t.test(always_use, never_use)
-t.test(always_use, sometimes_use)
-no_fp = vaginal_rich[samdf[, 'family_planning_use'] == 'No',]
-yes_fp = vaginal_rich[samdf[, 'family_planning_use'] == 'Yes',]
-t.test(no_fp, yes_fp)
+hpv_negative_shannon = vaginal_rich[samdf[, 'hpv_status'] == 'Negative', 'Shannon']
+hpv_positive_shannon = vaginal_rich[samdf[, 'hpv_status'] == 'Positive', 'Shannon']
+t.test(hpv_negative_shannon, hpv_positive_shannon)
+hpv_negative_simpson = vaginal_rich[samdf[, 'hpv_status'] == 'Negative', 'Simpson']
+hpv_positive_simpson = vaginal_rich[samdf[, 'hpv_status'] == 'Positive', 'Simpson']
+wilcox.test(hpv_negative_simpson, hpv_negative_simpson)
 
 #Transform data to proportions for Bray-Curtis distances (Beta diversity)
 vaginal_ps.prop <- transform_sample_counts(vaginal_ps, function(otu) otu/sum(otu))
