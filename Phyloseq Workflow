@@ -1,12 +1,13 @@
-#Load and install the necessary packages
-BiocManager::install("DESeq2")
-BiocManager::install("Biostrings", force = TRUE)
-library(Biostrings) ; packageVersion("Biostrings")
+#Load the necessary packages
+library(phyloseq)
+library(dada2)
+library(vegan)
+library(Biostrings)
+library(ShortRead)
+library(DESeq2)
+library(tidyverse)
 library(ggplot2)
 theme_set(theme_bw())
-library(DESeq2)
-library(ggplot2)
-library(tidyverse)
 
 #Import your sample metadata and convert it into a dataframe 
 samdf <- read.csv("/home/sophie/16s/hpv.metadata - Sheet1.csv")
