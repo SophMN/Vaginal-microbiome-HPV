@@ -1,0 +1,26 @@
+#DESeq2 differential abundance analysis
+vaginal_ps_clean <- subset_taxa(vaginal_ps, !is.na(Phylum) & !is.na(Genus))
+
+#Convert phyloseq object into a DESeq2 object
+vaginal_dds <- phyloseq_to_deseq2(vaginal_ps_clean, ~hpv_status)
+
+#Use geomeans to workaround zero counts and replace na values with 1
+geoMeans <- apply(counts(vaginal_dds), 1, function(x) {exp(sum(log(x[x >0])) / length(x))})
+geoMeans[is.na(geoMeans)] <- 1
+
+#Add size factors to the DESeq2 object
+vaginal_dds <- estimateSizeFactors(vaginal_dds, geoMeans = geoMeans)
+
+#Run the differential abundance analysis
+vaginal_dds <- DESeq(vaginal_dds)
+
+#Isolate and interpret the results
+vaginal_res <- results(vaginal_dds)
+summary(vaginal_res)
+
+#Visualise data with a volcano plot
+vaginal_res_df <- as.data.frame(vaginal_res)
+ggplot(vaginal_res_df, aes(x = log2FoldChange, y = -log10(padj))) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Volcono plot of differential abundance", x = "Log2 fold change", y = "-Log10 adjusted p-value")
