@@ -18,8 +18,16 @@ vaginal_dds <- DESeq(vaginal_dds)
 vaginal_res <- results(vaginal_dds)
 summary(vaginal_res)
 
-#Visualise data with a volcano plot
+#Create a dataframe from the DESeq2 results
 vaginal_res_df <- as.data.frame(vaginal_res)
+
+#Create non-significant, upregulated and downregulated columns based on the padj and log2foldchange values
+vaginal_res_df$significance <- "Non-significant"
+head(vaginal_res_df)
+vaginal_res_df$significance[vaginal_res_df$padj < 0.1 & vaginal_res_df$log2FoldChange > 0] <- "Upregulated"
+vaginal_res_df$significance[vaginal_res_df$padj < 0.1 & vaginal_res_df$log2FoldChange < 0] <- "Downregulated"
+
+#Visualise data with a volcano plot
 ggplot(vaginal_res_df, aes(x = log2FoldChange, y = -log10(padj))) +
   geom_point() +
   theme_minimal() +
