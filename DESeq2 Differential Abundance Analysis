@@ -32,3 +32,6 @@ ggplot(vaginal_res_df, aes(x = log2FoldChange, y = -log10(padj))) +
   geom_point() +
   theme_minimal() +
   labs(title = "Volcono plot of differential abundance", x = "Log2 fold change", y = "-Log10 adjusted p-value")
+
+#Visualise the differential abundance output using a MA plot
+plotMA(vaginal_dds, ylim = c(-2,2), main = "MA Plot of Differential Abundance")
