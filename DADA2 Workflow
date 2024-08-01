@@ -65,3 +65,6 @@ taxa <- assignTaxonomy(seqtab.nochim, "/home/sophie/Downloads/silva_nr_v132_trai
 taxa.print <- taxa
 rownames(taxa.print) <- NULL
 head(taxa.print)
+
+#Assign species
+taxa <- addSpecies(taxa, "silva_species_assignment_v132.fa.gz")
